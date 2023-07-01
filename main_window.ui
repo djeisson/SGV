@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>541</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Sistema de gerenciamento de vendas</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"> 
+background-color: rgb(85, 170, 255);</string>
+  </property>
+  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuCadastro">
+    <property name="title">
+     <string>Cadastro</string>
+    </property>
+    <widget class="QMenu" name="menuUsuario">
+     <property name="title">
+      <string>Usuario</string>
+     </property>
+     <addaction name="actionCadastrar_Usuario"/>
+     <addaction name="actionUsuarios_cadastrados"/>
+     <addaction name="actionEditar_usuario"/>
+    </widget>
+    <widget class="QMenu" name="menuProdutos">
+     <property name="title">
+      <string>Produtos</string>
+     </property>
+     <addaction name="actionCadastro_de_produtos"/>
+     <addaction name="actionEditar_produtos"/>
+    </widget>
+    <widget class="QMenu" name="menuTickets">
+     <property name="title">
+      <string>Tickets</string>
+     </property>
+     <addaction name="actionNovo_Ticket"/>
+     <addaction name="actionGerenciar_Ticket"/>
+     <addaction name="actionExcluir_Ticket"/>
+     <addaction name="separator"/>
+     <addaction name="actionConsultar_Ticket"/>
+    </widget>
+    <widget class="QMenu" name="menuCliente">
+     <property name="title">
+      <string>Cliente</string>
+     </property>
+     <addaction name="actionNovo_Cliente"/>
+     <addaction name="actionEditar_Cliente"/>
+    </widget>
+    <addaction name="menuUsuario"/>
+    <addaction name="menuProdutos"/>
+    <addaction name="menuTickets"/>
+    <addaction name="menuCliente"/>
+    <addaction name="separator"/>
+    <addaction name="actionSair"/>
+   </widget>
+   <widget class="QMenu" name="menuAbout">
+    <property name="title">
+     <string>About</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
+   <widget class="QMenu" name="menuRelatorios">
+    <property name="title">
+     <string>Relatorios</string>
+    </property>
+    <widget class="QMenu" name="menuProdutos_2">
+     <property name="title">
+      <string>Produtos</string>
+     </property>
+     <addaction name="actionPor_tipo"/>
+     <addaction name="actionPor_codigo"/>
+    </widget>
+    <widget class="QMenu" name="menuVendas_2">
+     <property name="title">
+      <string>Vendas</string>
+     </property>
+     <addaction name="actionTotal"/>
+     <addaction name="actionPor_usuario"/>
+    </widget>
+    <addaction name="menuProdutos_2"/>
+    <addaction name="menuVendas_2"/>
+   </widget>
+   <widget class="QMenu" name="menuVendas">
+    <property name="title">
+     <string>Vendas</string>
+    </property>
+    <addaction name="actionVenda_no_terminal"/>
+   </widget>
+   <addaction name="menuCadastro"/>
+   <addaction name="menuVendas"/>
+   <addaction name="menuRelatorios"/>
+   <addaction name="menuAbout"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionUsuarios_cadastrados">
+   <property name="text">
+    <string>Usuarios cadastrados</string>
+   </property>
+  </action>
+  <action name="actionEditar_usuario">
+   <property name="text">
+    <string>Editar usuario</string>
+   </property>
+  </action>
+  <action name="actionSair">
+   <property name="text">
+    <string>Sair</string>
+   </property>
+  </action>
+  <action name="actionCadastro_de_produtos">
+   <property name="text">
+    <string>Cadastro de produtos</string>
+   </property>
+  </action>
+  <action name="actionEditar_produtos">
+   <property name="text">
+    <string>Editar produtos</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionVendas_por_Usuario">
+   <property name="text">
+    <string>Vendas por Usuario</string>
+   </property>
+  </action>
+  <action name="actionPor_tipo">
+   <property name="text">
+    <string>Por tipo</string>
+   </property>
+  </action>
+  <action name="actionPor_codigo">
+   <property name="text">
+    <string>Por codigo</string>
+   </property>
+  </action>
+  <action name="actionTotal">
+   <property name="text">
+    <string>Total</string>
+   </property>
+  </action>
+  <action name="actionPor_usuario">
+   <property name="text">
+    <string>Por usuario</string>
+   </property>
+  </action>
+  <action name="actionVenda_no_terminal">
+   <property name="text">
+    <string>Venda no terminal</string>
+   </property>
+  </action>
+  <action name="actionNovo_Ticket">
+   <property name="text">
+    <string>Novo Ticket</string>
+   </property>
+  </action>
+  <action name="actionGerenciar_Ticket">
+   <property name="text">
+    <string>Gerenciar Ticket</string>
+   </property>
+  </action>
+  <action name="actionExcluir_Ticket">
+   <property name="text">
+    <string>Excluir Ticket</string>
+   </property>
+  </action>
+  <action name="actionConsultar_Ticket">
+   <property name="text">
+    <string>Consultar Ticket</string>
+   </property>
+  </action>
+  <action name="actionCadastrar_Usuario">
+   <property name="text">
+    <string>Cadastrar Usuario</string>
+   </property>
+  </action>
+  <action name="actionNovo_Cliente">
+   <property name="text">
+    <string>Novo Cliente</string>
+   </property>
+  </action>
+  <action name="actionEditar_Cliente">
+   <property name="text">
+    <string>Editar Cliente</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

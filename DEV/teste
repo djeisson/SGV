@@ -1,0 +1,37 @@
+import sys
+from PyQt5.QtWidgets import QApplication, QDialog
+from main_window_ui import Ui_MainWindow
+
+class MainWindow(QDialog):
+    def __init__(self, *args, **kwargs):
+        super(MainWindow, self).__init__(*args, **kwargs)
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self)
+
+app = QApplication(sys.argv)
+window = MainWindow()
+window.show()
+sys.exit(app.exec_())
+
+-----------------
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton
+from PyQt5 import QtWidgets
+from PyQt5.QtCore import pyqtSlot
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import *
+from PyQt5.QtGui import QIcon, QPixmap
+from PyQt5.QtPrintSupport import *
+import sys, os
+
+from main_window_ui import Ui_MainWindow
+
+class main(QDialog):
+    def __init__(self,*args,**argvs):
+        super(main,self).__init__(*args,**argvs)
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self)
+
+app = QApplication(sys.argv)
+window = Ui_MainWindow()
+window.show()
+sys.exit(app.exec_())

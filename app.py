@@ -1,7 +1,7 @@
 #Bibliotecas
 import sys, os
 from PySide6.QtWidgets import QApplication, QWidgetAction
-from PySide6.QtWidgets import QMainWindow, QMessageBox, QDialog
+from PySide6.QtWidgets import QMainWindow, QMessageBox, QDialog, QTableWidget,QTableWidgetItem
 from PyQt5 import *
 import sqlite3
 
@@ -15,6 +15,7 @@ from cad_ticket_ui import Ui_cad_ticket
 from about_ui import Ui_about
 from venda_desktop_ui import Ui_venda_desktop
 from cad_cliente_ui import Ui_cad_cliente
+from usuarios_cadastrados_ui import Ui_usuarios_cadastrados
 
 #tela de login
 class login(QMainWindow):
@@ -57,9 +58,14 @@ class MainWindow(QMainWindow):
         self.ui.actionAbout.triggered.connect(self.abrir_about)
         self.ui.actionVenda_no_terminal.triggered.connect(self.nova_venda)
         self.ui.actionNovo_Cliente.triggered.connect(self.cad_cliente)
+        self.ui.actionUsuarios_cadastrados.triggered.connect(self.usuarios_cadastrados)
     
 
     #definindo funções para chamadas de tela a partir do Mainwindow
+    def usuarios_cadastrados(self):
+        self.window = usuarios_cadastrados()
+        self.window.show()
+
     def cad_cliente(self):
         self.window = cad_cliente()
         self.window.show()
@@ -155,6 +161,42 @@ class about(QDialog):
         self.ui = Ui_about()
         self.ui.setupUi(self)
         self.ui.pushButton.clicked.connect(self.fechar)
+
+    def fechar(self):
+        self.close()
+        print("tela about fechada")
+
+class usuarios_cadastrados(QDialog):
+    def __init__(self):
+        super().__init__()
+        self.ui = Ui_usuarios_cadastrados()
+        self.ui.setupUi(self)
+        self.ui.pushButton.clicked.connect(self.listar_usuarios)
+        self.ui.pushButton_3.clicked.connect(self.fechar)
+        self.ui.tableWidget.setColumnCount(4)
+        self.ui.tableWidget.setHorizontalHeaderLabels(['ID', 'Nome', 'Usuário', 'CPF'])
+    
+    def listar_usuarios(self):
+        conn = sqlite3.connect('SGV.DB')
+        cursor = conn.cursor()
+
+        # Executar consulta para obter os usuários
+        cursor.execute('SELECT ID, NOME_USUARIO, USUARIO, CPF FROM TBL_USUARIOS')
+        users = cursor.fetchall()
+        cursor.close()
+        conn.close()
+
+        # Limpar a tabela
+        self.ui.tableWidget.clearContents()
+        self.ui.tableWidget.setRowCount(len(users))
+        
+        for row, user in enumerate(users):
+            # Adicionar os dados do usuário na QTableWidget
+            for col, data in enumerate(user):
+                item = QTableWidgetItem(str(data))
+                self.ui.tableWidget.setItem(row, col, item)
+        
+        print("listagem bem sucedida")
 
     def fechar(self):
         self.close()

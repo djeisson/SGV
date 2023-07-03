@@ -22,7 +22,7 @@ class Ui_login(object):
     def setupUi(self, Dialog):
         if not Dialog.objectName():
             Dialog.setObjectName(u"Dialog")
-        Dialog.resize(407, 229)
+        Dialog.resize(407, 225)
         Dialog.setStyleSheet(u"background-color: rgb(85, 170, 255);")
         self.label = QLabel(Dialog)
         self.label.setObjectName(u"label")
@@ -61,6 +61,9 @@ class Ui_login(object):
 
         self.horizontalLayout.addWidget(self.pushButton_2)
 
+        QWidget.setTabOrder(self.lineEdit_3, self.lineEdit_2)
+        QWidget.setTabOrder(self.lineEdit_2, self.pushButton)
+        QWidget.setTabOrder(self.pushButton, self.pushButton_2)
 
         self.retranslateUi(Dialog)
 

@@ -49,16 +49,11 @@ class Ui_usuarios_cadastrados(object):
 "font: 12pt \"MS Shell Dlg 2\";")
         self.pushButton = QPushButton(Dialog)
         self.pushButton.setObjectName(u"pushButton")
-        self.pushButton.setGeometry(QRect(260, 270, 101, 23))
+        self.pushButton.setGeometry(QRect(200, 270, 101, 23))
         self.pushButton.setStyleSheet(u"background-color: rgb(255, 255, 255);")
-        self.pushButton_2 = QPushButton(Dialog)
-        self.pushButton_2.setObjectName(u"pushButton_2")
-        self.pushButton_2.setGeometry(QRect(140, 270, 101, 23))
-        self.pushButton_2.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
-"color: rgb(85, 170, 255);")
         self.pushButton_3 = QPushButton(Dialog)
         self.pushButton_3.setObjectName(u"pushButton_3")
-        self.pushButton_3.setGeometry(QRect(380, 270, 101, 23))
+        self.pushButton_3.setGeometry(QRect(320, 270, 101, 23))
         self.pushButton_3.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
 "color: rgb(255, 0, 0);")
 
@@ -81,7 +76,6 @@ class Ui_usuarios_cadastrados(object):
         ___qtablewidgetitem4.setText(QCoreApplication.translate("Dialog", u"SENHA", None));
         self.label.setText(QCoreApplication.translate("Dialog", u"LISTA DE USUARIOS", None))
         self.pushButton.setText(QCoreApplication.translate("Dialog", u"Buscar", None))
-        self.pushButton_2.setText(QCoreApplication.translate("Dialog", u"Editar", None))
         self.pushButton_3.setText(QCoreApplication.translate("Dialog", u"Cancelar", None))
     # retranslateUi
 

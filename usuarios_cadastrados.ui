@@ -75,7 +75,7 @@ font: 12pt &quot;MS Shell Dlg 2&quot;;</string>
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>260</x>
+     <x>200</x>
      <y>270</y>
      <width>101</width>
      <height>23</height>
@@ -88,27 +88,10 @@ font: 12pt &quot;MS Shell Dlg 2&quot;;</string>
     <string>Buscar</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
-   <property name="geometry">
-    <rect>
-     <x>140</x>
-     <y>270</y>
-     <width>101</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(85, 170, 255);</string>
-   </property>
-   <property name="text">
-    <string>Editar</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="pushButton_3">
    <property name="geometry">
     <rect>
-     <x>380</x>
+     <x>320</x>
      <y>270</y>
      <width>101</width>
      <height>23</height>

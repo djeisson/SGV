@@ -1,7 +1,7 @@
 #Bibliotecas
 import sys, os
 from PySide6.QtWidgets import QApplication, QWidgetAction
-from PySide6.QtWidgets import QMainWindow, QMessageBox, QDialog, QTableWidget,QTableWidgetItem
+from PySide6.QtWidgets import QMainWindow, QMessageBox, QDialog, QTableWidget,QTableWidgetItem,QPushButton
 from PyQt5 import *
 import sqlite3
 
@@ -26,20 +26,31 @@ class login(QMainWindow):
         self.ui.setupUi(self)
 
         self.ui.pushButton.clicked.connect(self.verificacao_login)
-        self.ui.pushButton_2.clicked.connect(self.fechar)        
+        self.ui.pushButton_2.clicked.connect(self.fechar) 
+        self.ui.pushButton.setDefault(True)
 
     def verificacao_login(self):
-        login_padrao = "a"
-        senha_padrao = "a"
         login = self.ui.lineEdit_2.text()
         password = self.ui.lineEdit_3.text()
 
-        if login == login_padrao and password == senha_padrao:
+        # Conexão com o banco de dados
+        conn = sqlite3.connect('SGV.DB')
+        cursor = conn.cursor()
+
+        # Consulta para verificar se o usuário existe
+        cursor.execute("SELECT COUNT(*) FROM TBL_USUARIOS WHERE USUARIO = ? AND SENHA = ?", (login, password))
+        result = cursor.fetchone()
+
+        if result[0] > 0:
             self.window = MainWindow()
             self.window.show()
             self.close()
         else:
             QMessageBox.information(self, "Alerta de Login", "Usuário ou senha inválidos.")
+
+        # Fechar a conexão com o banco de dados
+        cursor.close()
+        conn.close()
         
     def fechar(self):
         app.quit()

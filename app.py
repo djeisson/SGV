@@ -55,6 +55,7 @@ class login(QMainWindow):
     def fechar(self):
         app.quit()
         print("tela de login fechada")
+    
 #tela principal
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -112,27 +113,54 @@ class cad_usuario(QMainWindow):
         self.ui.setupUi(self)
         self.ui.pushButton_2.clicked.connect(self.fechar)
         self.ui.pushButton_3.clicked.connect(self.salvar_usuario)
-
+        
+        
     def salvar_usuario(self):
         nome_usuario = self.ui.lineEdit.text()
         usuario = self.ui.lineEdit_2.text()
         cpf = self.ui.lineEdit_4.text()
         senha = self.ui.lineEdit_3.text()
-        #conexão com banco
-        conn = sqlite3.connect('SGV.DB')
-        cursor = conn.cursor()
-        #executar cursor
-        cursor.execute("CREATE TABLE IF NOT EXISTS TBL_USUARIOS (nome_usuario TEXT, usuario TEXT, cpf TEXT, senha TEXT)")
-        cursor.execute("INSERT INTO TBL_USUARIOS (NOME_USUARIO, USUARIO, CPF, SENHA) VALUES (?, ?, ?, ?)", (nome_usuario, usuario, cpf, senha))
-        # Salvar as alterações
-        conn.commit()
-        conn.close()
-        QMessageBox.information(self, "Alerta de Cadastro", "Usuário cadastrado com sucesso!.")
-        print("cadastro efetuado")
-        self.fechar()
-
+        tipo = self.ui.comboBox.currentText()
+        """
+        nome_usuario = nome_usuario.upper()
+        usuario = usuario.upper()
+        senha = senha.upper()
+        tipo = tipo.upper()
+        """  
+        if nome_usuario.strip() == "":
+            QMessageBox.information(self, "Alerta de Cadastro", "Nome invalido!\nVerifique.")
+            print("Nome invalido, verifique")
+        elif usuario is None or usuario.strip() == "":
+            QMessageBox.information(self, "Alerta de Cadastro", "Usuario invalido!\nVerifique.")
+            print("Usuario invalido, verifique")
+        elif senha is None or senha.strip() == "":
+            QMessageBox.information(self, "Alerta de Cadastro", "senha invalida!\nVerifique.")
+            print( "senha invalida, verifique")
+        elif cpf.isdigit() and len(cpf) == 11:#cpf.isnumeric
+            print("CPF invalido, verifique")
+            QMessageBox.information(self, "Alerta de Cadastro", "CPF invalido!\nVerifique.")
+        else:
+            conn = sqlite3.connect('SGV.DB')
+            cursor = conn.cursor()
+            #executar cursor
+            cursor.execute("SELECT * FROM TBL_USUARIOS WHERE USUARIO = ?", (usuario,))
+            result = cursor.fetchone()
+            if result:
+                print("Usuário já existe")
+                QMessageBox.information(self, "Alerta de Cadastro", "Usuario ja cadastrado!\nVerifique.")
+            else:
+                cursor.execute("INSERT INTO TBL_USUARIOS (NOME_USUARIO, USUARIO, CPF, SENHA, TIPO) VALUES (?, ?, ?, ?, ?)", (nome_usuario, usuario, cpf, senha, tipo))
+                # Salvar as alterações
+                conn.commit()
+                conn.close()
+                print("usuario cadastrado com sucesso")
+                QMessageBox.information(self, "Alerta de Cadastro", "Usuário cadastrado com sucesso!.")
+                print("cadastro efetuado")
+                self.fechar()
+    
     def fechar(self):
-        self.close()
+        QApplication.quit()
+    
 
 class cad_produtos(QMainWindow):
     def __init__(self):
@@ -184,15 +212,15 @@ class usuarios_cadastrados(QDialog):
         self.ui.setupUi(self)
         self.ui.pushButton.clicked.connect(self.listar_usuarios)
         self.ui.pushButton_3.clicked.connect(self.fechar)
-        self.ui.tableWidget.setColumnCount(4)
-        self.ui.tableWidget.setHorizontalHeaderLabels(['ID', 'Nome', 'Usuário', 'CPF'])
+        self.ui.tableWidget.setColumnCount(5)
+        self.ui.tableWidget.setHorizontalHeaderLabels(['ID', 'Nome', 'Usuário', 'CPF', 'TIPO'])
     
     def listar_usuarios(self):
         conn = sqlite3.connect('SGV.DB')
         cursor = conn.cursor()
 
         # Executar consulta para obter os usuários
-        cursor.execute('SELECT ID, NOME_USUARIO, USUARIO, CPF FROM TBL_USUARIOS')
+        cursor.execute('SELECT ID, NOME_USUARIO, USUARIO, CPF, TIPO FROM TBL_USUARIOS')
         users = cursor.fetchall()
         cursor.close()
         conn.close()

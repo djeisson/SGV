@@ -24,8 +24,7 @@ class Ui_MainWindow(object):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(800, 541)
-        MainWindow.setStyleSheet(u" \n"
-"background-color: rgb(85, 170, 255);")
+        MainWindow.setStyleSheet(u"")
         self.actionUsuarios_cadastrados = QAction(MainWindow)
         self.actionUsuarios_cadastrados.setObjectName(u"actionUsuarios_cadastrados")
         self.actionEditar_usuario = QAction(MainWindow)

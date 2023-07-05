@@ -23,7 +23,7 @@ class Ui_login(object):
         if not Dialog.objectName():
             Dialog.setObjectName(u"Dialog")
         Dialog.resize(407, 225)
-        Dialog.setStyleSheet(u"background-color: rgb(85, 170, 255);")
+        Dialog.setStyleSheet(u"")
         self.label = QLabel(Dialog)
         self.label.setObjectName(u"label")
         self.label.setGeometry(QRect(180, 20, 51, 21))

@@ -15,19 +15,19 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QHBoxLayout, QLabel, QLineEdit,
-    QPushButton, QRadioButton, QSizePolicy, QVBoxLayout,
+from PySide6.QtWidgets import (QApplication, QComboBox, QHBoxLayout, QLabel,
+    QLineEdit, QPushButton, QSizePolicy, QVBoxLayout,
     QWidget)
 
 class Ui_cad_usuario(object):
     def setupUi(self, Form):
         if not Form.objectName():
             Form.setObjectName(u"Form")
-        Form.resize(377, 289)
-        Form.setStyleSheet(u"background-color: rgb(85, 170, 255);")
+        Form.resize(377, 230)
+        Form.setStyleSheet(u"")
         self.layoutWidget = QWidget(Form)
         self.layoutWidget.setObjectName(u"layoutWidget")
-        self.layoutWidget.setGeometry(QRect(20, 40, 45, 151))
+        self.layoutWidget.setGeometry(QRect(20, 0, 45, 181))
         self.verticalLayout = QVBoxLayout(self.layoutWidget)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -55,9 +55,15 @@ class Ui_cad_usuario(object):
 
         self.verticalLayout.addWidget(self.label_3)
 
+        self.label_5 = QLabel(self.layoutWidget)
+        self.label_5.setObjectName(u"label_5")
+        self.label_5.setStyleSheet(u"font: 10pt \"MS Shell Dlg 2\";")
+
+        self.verticalLayout.addWidget(self.label_5)
+
         self.layoutWidget1 = QWidget(Form)
         self.layoutWidget1.setObjectName(u"layoutWidget1")
-        self.layoutWidget1.setGeometry(QRect(80, 40, 281, 151))
+        self.layoutWidget1.setGeometry(QRect(80, 0, 281, 191))
         self.verticalLayout_2 = QVBoxLayout(self.layoutWidget1)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
@@ -86,9 +92,18 @@ class Ui_cad_usuario(object):
 
         self.verticalLayout_2.addWidget(self.lineEdit_3)
 
+        self.comboBox = QComboBox(self.layoutWidget1)
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.setObjectName(u"comboBox")
+        self.comboBox.setStyleSheet(u"background-color: rgb(255, 255, 255);")
+
+        self.verticalLayout_2.addWidget(self.comboBox)
+
         self.layoutWidget2 = QWidget(Form)
         self.layoutWidget2.setObjectName(u"layoutWidget2")
-        self.layoutWidget2.setGeometry(QRect(20, 230, 341, 25))
+        self.layoutWidget2.setGeometry(QRect(20, 190, 341, 25))
         self.horizontalLayout = QHBoxLayout(self.layoutWidget2)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
@@ -105,27 +120,6 @@ class Ui_cad_usuario(object):
 
         self.horizontalLayout.addWidget(self.pushButton_2)
 
-        self.layoutWidget3 = QWidget(Form)
-        self.layoutWidget3.setObjectName(u"layoutWidget3")
-        self.layoutWidget3.setGeometry(QRect(20, 200, 341, 20))
-        self.horizontalLayout_2 = QHBoxLayout(self.layoutWidget3)
-        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.radioButton = QRadioButton(self.layoutWidget3)
-        self.radioButton.setObjectName(u"radioButton")
-
-        self.horizontalLayout_2.addWidget(self.radioButton)
-
-        self.radioButton_2 = QRadioButton(self.layoutWidget3)
-        self.radioButton_2.setObjectName(u"radioButton_2")
-
-        self.horizontalLayout_2.addWidget(self.radioButton_2)
-
-        self.radioButton_3 = QRadioButton(self.layoutWidget3)
-        self.radioButton_3.setObjectName(u"radioButton_3")
-
-        self.horizontalLayout_2.addWidget(self.radioButton_3)
-
 
         self.retranslateUi(Form)
 
@@ -138,11 +132,13 @@ class Ui_cad_usuario(object):
         self.label_2.setText(QCoreApplication.translate("Form", u"Usuario", None))
         self.label_4.setText(QCoreApplication.translate("Form", u"CPF", None))
         self.label_3.setText(QCoreApplication.translate("Form", u"Senha", None))
+        self.label_5.setText(QCoreApplication.translate("Form", u"Tipo", None))
         self.lineEdit_3.setText("")
+        self.comboBox.setItemText(0, QCoreApplication.translate("Form", u"ADM", None))
+        self.comboBox.setItemText(1, QCoreApplication.translate("Form", u"VENDEDOR", None))
+        self.comboBox.setItemText(2, QCoreApplication.translate("Form", u"GESTOR", None))
+
         self.pushButton_3.setText(QCoreApplication.translate("Form", u"Salvar", None))
         self.pushButton_2.setText(QCoreApplication.translate("Form", u"Cancelar", None))
-        self.radioButton.setText(QCoreApplication.translate("Form", u"ADM", None))
-        self.radioButton_2.setText(QCoreApplication.translate("Form", u"USER", None))
-        self.radioButton_3.setText(QCoreApplication.translate("Form", u"ADM/USER", None))
     # retranslateUi
 

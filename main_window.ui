@@ -14,8 +14,7 @@
    <string>Sistema de gerenciamento de vendas</string>
   </property>
   <property name="styleSheet">
-   <string notr="true"> 
-background-color: rgb(85, 170, 255);</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget"/>
   <widget class="QMenuBar" name="menubar">

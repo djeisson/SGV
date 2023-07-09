@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>837</width>
+    <height>321</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Produtos cadastrados</string>
+  </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>30</y>
+     <width>161</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(0, 0, 0);
+font: 75 12pt &quot;MS Shell Dlg 2&quot;;
+color: rgb(85, 170, 255);</string>
+   </property>
+   <property name="text">
+    <string>Produtos cadastrados</string>
+   </property>
+  </widget>
+  <widget class="QTableWidget" name="tableWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>70</y>
+     <width>811</width>
+     <height>192</height>
+    </rect>
+   </property>
+   <column>
+    <property name="text">
+     <string>ID_PRODUTO</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>DESCRICAO</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>CUSTO_PRODUTO</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>VALOR_VENDA_PRODUTO</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>QUANTIDADE_ESTOQUE</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>UNIDADE_PRODUTO</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>GRUPO</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>SUBGRUPO</string>
+    </property>
+   </column>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>280</y>
+     <width>461</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QPushButton" name="pushButton">
+      <property name="styleSheet">
+       <string notr="true">color: rgb(85, 170, 255);
+background-color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>Buscar</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pushButton_2">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(255, 0, 0);</string>
+      </property>
+      <property name="text">
+       <string>Cancelar</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

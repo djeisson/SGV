@@ -23,16 +23,16 @@ class Ui_cad_cliente(object):
     def setupUi(self, Dialog):
         if not Dialog.objectName():
             Dialog.setObjectName(u"Dialog")
-        Dialog.resize(400, 256)
-        Dialog.setStyleSheet(u"background-color: rgb(85, 170, 255);")
+        Dialog.resize(400, 283)
+        Dialog.setStyleSheet(u"")
         self.pushButton = QPushButton(Dialog)
         self.pushButton.setObjectName(u"pushButton")
-        self.pushButton.setGeometry(QRect(60, 210, 181, 23))
+        self.pushButton.setGeometry(QRect(60, 230, 181, 23))
         self.pushButton.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
 "color: rgb(85, 170, 255);")
         self.pushButton_2 = QPushButton(Dialog)
         self.pushButton_2.setObjectName(u"pushButton_2")
-        self.pushButton_2.setGeometry(QRect(300, 210, 81, 23))
+        self.pushButton_2.setGeometry(QRect(300, 230, 81, 23))
         self.pushButton_2.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
 "color: rgb(255, 0, 0);")
         self.label = QLabel(Dialog)
@@ -67,9 +67,21 @@ class Ui_cad_cliente(object):
         self.label_5.setObjectName(u"label_5")
         self.label_5.setGeometry(QRect(270, 150, 21, 21))
         self.comboBox = QComboBox(Dialog)
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
         self.comboBox.setObjectName(u"comboBox")
         self.comboBox.setGeometry(QRect(298, 150, 81, 22))
         self.comboBox.setStyleSheet(u"background-color: rgb(255, 255, 255);")
+        self.label_6 = QLabel(Dialog)
+        self.label_6.setObjectName(u"label_6")
+        self.label_6.setGeometry(QRect(50, 190, 61, 21))
+        self.lineEdit_4 = QLineEdit(Dialog)
+        self.lineEdit_4.setObjectName(u"lineEdit_4")
+        self.lineEdit_4.setGeometry(QRect(130, 190, 251, 20))
+        self.lineEdit_4.setStyleSheet(u"background-color: rgb(255, 255, 255);")
 
         self.retranslateUi(Dialog)
 
@@ -85,5 +97,12 @@ class Ui_cad_cliente(object):
         self.label_3.setText(QCoreApplication.translate("Dialog", u"D.Nascimento", None))
         self.label_4.setText(QCoreApplication.translate("Dialog", u"Email", None))
         self.label_5.setText(QCoreApplication.translate("Dialog", u"UF", None))
+        self.comboBox.setItemText(0, QCoreApplication.translate("Dialog", u"PR", None))
+        self.comboBox.setItemText(1, QCoreApplication.translate("Dialog", u"RS", None))
+        self.comboBox.setItemText(2, QCoreApplication.translate("Dialog", u"SP", None))
+        self.comboBox.setItemText(3, QCoreApplication.translate("Dialog", u"RJ", None))
+        self.comboBox.setItemText(4, QCoreApplication.translate("Dialog", u"SC", None))
+
+        self.label_6.setText(QCoreApplication.translate("Dialog", u"Ticket", None))
     # retranslateUi
 

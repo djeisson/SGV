@@ -17,7 +17,7 @@ from venda_desktop_ui import Ui_venda_desktop
 from cad_cliente_ui import Ui_cad_cliente
 from usuarios_cadastrados_ui import Ui_usuarios_cadastrados
 from produtos_cadastrados_ui import Ui_produtos_cadastrados
-
+from clientes_cadastrados_ui import Ui_clientes_cadastrados
 
 #tela de login
 class login(QMainWindow):
@@ -74,9 +74,14 @@ class MainWindow(QMainWindow):
         self.ui.actionNovo_Cliente.triggered.connect(self.cad_cliente)
         self.ui.actionUsuarios_cadastrados.triggered.connect(self.usuarios_cadastrados)
         self.ui.actionEditar_produtos.triggered.connect(self.produtos_cadastrados)
+        self.ui.actionEditar_Cliente.triggered.connect(self.cliente_cadastrados)
     
 
     #definindo funções para chamadas de tela a partir do Mainwindow
+    def cliente_cadastrados(self):
+        self.window = clientes_cadastrados()
+        self.window.show()
+
     def produtos_cadastrados(self):
         self.window = produtos_cadastrados()
         self.window.show()
@@ -304,6 +309,23 @@ class cad_cliente(QDialog):
         self.ui.pushButton_2.clicked.connect(self.fechar)
 
     def salvar(self):
+        nome =self.ui.lineEdit.text()
+        cpf =self.ui.lineEdit_2.text()
+        email =self.ui.lineEdit_3.text()
+        data_nasc = self.ui.dateEdit.text()
+        uf = self.ui.comboBox.currentText()
+        ticket = self.ui.lineEdit_4.text()
+
+        conn = sqlite3.connect('SGV.DB')
+        cursor = conn.cursor()
+        #executar cursor
+        cursor.execute("INSERT INTO TBL_CLIENTE (NOME, CPF, EMAIL, NASCIMENTO, UF,TICKET) VALUES (?, ?, ?, ?, ?, ?)", (nome, cpf, email, data_nasc, uf, ticket))
+        # Salvar as alterações
+        conn.commit()
+        conn.close()
+        QMessageBox.information(self, "Alerta de Cadastro", "Cliente cadastrado com sucesso!.")
+        print("cadastro efetuado")
+        self.fechar()
         print("salvar")
 
     def fechar(self):
@@ -347,7 +369,44 @@ class produtos_cadastrados(QDialog):
         print("tela de produtos cadastrados fechada")
         self.close()
 
+class clientes_cadastrados(QDialog):
+    def __init__(self):
+        super().__init__()
+        self.ui = Ui_clientes_cadastrados()
+        self.ui.setupUi(self)
+        self.ui.pushButton.clicked.connect(self.listar_produtos)
+        self.ui.pushButton_3.clicked.connect(self.fechar)
+        self.ui.tableWidget.setColumnCount(7)
+        self.ui.tableWidget.setHorizontalHeaderLabels(['ID', 'NOME', 'CPF', 'EMAIL', 'NASCIMENTO', 'UF', 'TICKET'])
 
+    def listar_produtos(self):
+        conn = sqlite3.connect('SGV.DB')
+        cursor = conn.cursor()
+
+        # Executar consulta para obter os usuários
+        cursor.execute('SELECT ID, NOME, CPF, EMAIL, NASCIMENTO, UF, TICKET FROM TBL_CLIENTE')
+        users = cursor.fetchall()
+        cursor.close()
+        conn.close()
+
+        # Limpar a tabela
+        self.ui.tableWidget.clearContents()
+        self.ui.tableWidget.setRowCount(len(users))
+        
+        for row, user in enumerate(users):
+            # Adicionar os dados do usuário na QTableWidget
+            for col, data in enumerate(user):
+                item = QTableWidgetItem(str(data))
+                self.ui.tableWidget.setItem(row, col, item)
+        
+        print("listagem bem sucedida")
+
+
+    def fechar(self):
+        print("tela de produtos cadastrados fechada")
+        self.close()
+
+        
 app = QApplication(sys.argv)
 window = login()
 window.show()

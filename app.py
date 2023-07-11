@@ -19,6 +19,7 @@ from usuarios_cadastrados_ui import Ui_usuarios_cadastrados
 from produtos_cadastrados_ui import Ui_produtos_cadastrados
 from clientes_cadastrados_ui import Ui_clientes_cadastrados
 from gerar_ticket_ui import Ui_gerar_ticket
+from editar_ticket import Ui_editar_ticket
 
 #tela de login
 class login(QMainWindow):
@@ -77,9 +78,15 @@ class MainWindow(QMainWindow):
         self.ui.actionEditar_produtos.triggered.connect(self.produtos_cadastrados)
         self.ui.actionEditar_Cliente.triggered.connect(self.cliente_cadastrados)
         self.ui.actionGerar_Qtd_Ticket.triggered.connect(self.gerar_ticket)
+        self.ui.actionGerenciar_Ticket.triggered.connect(self.editar_ticket)
     
 
     #definindo funções para chamadas de tela a partir do Mainwindow
+
+    def editar_ticket(self):
+        self.window = editar_ticket()
+        self.window.show()
+
     def gerar_ticket(self):
         self.window = gerar_ticket()
         self.window.show()
@@ -452,6 +459,43 @@ class gerar_ticket(QDialog):
         self.close()
     def fechar(self):
         print("tela de ticket fechada")
+        self.close()
+
+class editar_ticket(QDialog):
+    def __init__(self):
+        super().__init__()
+        self.ui = Ui_editar_ticket()
+        self.ui.setupUi(self)
+        self.ui.pushButton.clicked.connect(self.listar_tickets)
+        self.ui.pushButton_2.clicked.connect(self.fechar)
+        self.ui.tableWidget.setColumnCount(4)
+        self.ui.tableWidget.setHorizontalHeaderLabels(['ID_TICKET', 'NUMERO_TICKET', 'VALOR_TICKET', 'CLIENTE_TICKET'])
+
+    def listar_tickets(self):
+        conn = sqlite3.connect('SGV.DB')
+        cursor = conn.cursor()
+
+        # Executar consulta para obter os usuários
+        cursor.execute('SELECT * FROM TBL_TICKET')
+        users = cursor.fetchall()
+        cursor.close()
+        conn.close()
+
+        # Limpar a tabela
+        self.ui.tableWidget.clearContents()
+        self.ui.tableWidget.setRowCount(len(users))
+        
+        for row, user in enumerate(users):
+            
+            for col, data in enumerate(user):
+                item = QTableWidgetItem(str(data))
+                self.ui.tableWidget.setItem(row, col, item)
+        
+        print("listagem bem sucedida")
+
+
+    def fechar(self):
+        print("tela de produtos cadastrados fechada")
         self.close()
 
 app = QApplication(sys.argv)

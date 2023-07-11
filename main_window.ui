@@ -36,7 +36,6 @@
      </property>
      <addaction name="actionCadastrar_Usuario"/>
      <addaction name="actionUsuarios_cadastrados"/>
-     <addaction name="actionEditar_usuario"/>
     </widget>
     <widget class="QMenu" name="menuProdutos">
      <property name="title">
@@ -51,9 +50,7 @@
      </property>
      <addaction name="actionNovo_Ticket"/>
      <addaction name="actionGerenciar_Ticket"/>
-     <addaction name="actionExcluir_Ticket"/>
-     <addaction name="separator"/>
-     <addaction name="actionConsultar_Ticket"/>
+     <addaction name="actionGerar_Qtd_Ticket"/>
     </widget>
     <widget class="QMenu" name="menuCliente">
      <property name="title">
@@ -98,9 +95,10 @@
    </widget>
    <widget class="QMenu" name="menuVendas">
     <property name="title">
-     <string>Vendas</string>
+     <string>Movimentações</string>
     </property>
     <addaction name="actionVenda_no_terminal"/>
+    <addaction name="actionSaida_avulsa"/>
    </widget>
    <addaction name="menuCadastro"/>
    <addaction name="menuVendas"/>
@@ -175,7 +173,7 @@
   </action>
   <action name="actionGerenciar_Ticket">
    <property name="text">
-    <string>Gerenciar Ticket</string>
+    <string>Editar Ticket</string>
    </property>
   </action>
   <action name="actionExcluir_Ticket">
@@ -201,6 +199,16 @@
   <action name="actionEditar_Cliente">
    <property name="text">
     <string>Editar Cliente</string>
+   </property>
+  </action>
+  <action name="actionGerar_Qtd_Ticket">
+   <property name="text">
+    <string>Gerar Qtd. Ticket</string>
+   </property>
+  </action>
+  <action name="actionSaida_avulsa">
+   <property name="text">
+    <string>Saida avulsa</string>
    </property>
   </action>
  </widget>

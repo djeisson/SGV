@@ -6,7 +6,7 @@ from PyQt5 import *
 import sqlite3
 
 #importando telas
-from main_window_ui import Ui_MainWindow
+from main_window import Ui_MainWindow
 from cad_usuario_ui import Ui_cad_usuario
 from login_ui import Ui_login
 from cad_produtos_ui import Ui_cad_produtos
@@ -18,6 +18,7 @@ from cad_cliente_ui import Ui_cad_cliente
 from usuarios_cadastrados_ui import Ui_usuarios_cadastrados
 from produtos_cadastrados_ui import Ui_produtos_cadastrados
 from clientes_cadastrados_ui import Ui_clientes_cadastrados
+from gerar_ticket_ui import Ui_gerar_ticket
 
 #tela de login
 class login(QMainWindow):
@@ -75,9 +76,14 @@ class MainWindow(QMainWindow):
         self.ui.actionUsuarios_cadastrados.triggered.connect(self.usuarios_cadastrados)
         self.ui.actionEditar_produtos.triggered.connect(self.produtos_cadastrados)
         self.ui.actionEditar_Cliente.triggered.connect(self.cliente_cadastrados)
+        self.ui.actionGerar_Qtd_Ticket.triggered.connect(self.gerar_ticket)
     
 
     #definindo funções para chamadas de tela a partir do Mainwindow
+    def gerar_ticket(self):
+        self.window = gerar_ticket()
+        self.window.show()
+
     def cliente_cadastrados(self):
         self.window = clientes_cadastrados()
         self.window.show()
@@ -85,6 +91,7 @@ class MainWindow(QMainWindow):
     def produtos_cadastrados(self):
         self.window = produtos_cadastrados()
         self.window.show()
+
     def usuarios_cadastrados(self):
         self.window = usuarios_cadastrados()
         self.window.show()
@@ -170,7 +177,7 @@ class cad_usuario(QMainWindow):
                 self.fechar()
     
     def fechar(self):
-        QApplication.quit()
+        self.close()
     
 
 class cad_produtos(QMainWindow):
@@ -259,24 +266,29 @@ class cad_ticket(QDialog):
         self.ui.setupUi(self)
         self.ui.pushButton.clicked.connect(self.cadastrar_ticket)
         self.ui.pushButton_2.clicked.connect(self.fechar)
-    
+
     def cadastrar_ticket(self):
         numero = self.ui.lineEdit.text()
         valor = self.ui.lineEdit_2.text()
         cliente = self.ui.comboBox.currentText()
-        
-        #conexão com banco
+
+        # Verificar se o ticket já existe
         conn = sqlite3.connect('SGV.DB')
         cursor = conn.cursor()
-        #executar cursor
-        cursor.execute("INSERT INTO TBL_TICKET (NUMERO_TICKET, VALOR_TICKET, CLIENTE_TICKET) VALUES (?, ?, ?)", (numero, valor, cliente))
-        # Salvar as alterações
-        conn.commit()
+        cursor.execute("SELECT * FROM TBL_TICKET WHERE NUMERO_TICKET = ? AND CLIENTE_TICKET = ?", (numero, cliente))
+        existing_ticket = cursor.fetchone()
+
+        if existing_ticket:
+            QMessageBox.warning(self, "Alerta de Cadastro", "O ticket já existe para esse cliente.")
+        else:
+            # Inserir o novo ticket no banco de dados
+            cursor.execute("INSERT INTO TBL_TICKET (NUMERO_TICKET, VALOR_TICKET, CLIENTE_TICKET) VALUES (?, ?, ?)", (numero, valor, cliente))
+            conn.commit()
+            QMessageBox.information(self, "Alerta de Cadastro", "Ticket cadastrado com sucesso!")
+
         conn.close()
-        QMessageBox.information(self, "Alerta de Cadastro", "Ticket cadastrado com sucesso!.")
-        print("cadastro efetuado")
         self.fechar()
-    
+
     def fechar(self):
         self.close()
         print("tela de cadastro de ticket fechada")
@@ -406,7 +418,42 @@ class clientes_cadastrados(QDialog):
         print("tela de produtos cadastrados fechada")
         self.close()
 
+class gerar_ticket(QDialog):
+    def __init__(self):
+        super().__init__()
+        self.ui = Ui_gerar_ticket()
+        self.ui.setupUi(self)
+        self.ui.pushButton_2.clicked.connect(self.fechar)
+        self.ui.pushButton.clicked.connect(self.abrir_confirmacao)
         
+    def abrir_confirmacao(self):
+        qtd = self.ui.lineEdit.text()
+        qtd = int(qtd)
+        reply = QMessageBox.question(self, "Alerta de Cadastro", "Deseja cadastrar os tickets?", QMessageBox.Yes | QMessageBox.No)
+        if reply == QMessageBox.Yes:
+            pass
+        else:
+            self.fechar()
+        conn = sqlite3.connect('SGV.DB')
+        cursor = conn.cursor()
+        cursor.execute("SELECT MAX(NUMERO_TICKET) FROM TBL_TICKET")
+        result = cursor.fetchone()
+        ultimo_numero = result[0]
+
+        for i in range(qtd):
+            ultimo_numero = result[0] if result[0] is not None else 0
+            numero_ticket = ultimo_numero + i + 1
+            cursor.execute("INSERT INTO TBL_TICKET (NUMERO_TICKET) VALUES (?)", (numero_ticket,))
+        
+        conn.commit()
+        conn.close()
+        QMessageBox.information(self, "Alerta de Cadastro", f"{qtd} Tickets cadastrados com sucesso!.")
+        print("cadastro efetuado")
+        self.close()
+    def fechar(self):
+        print("tela de ticket fechada")
+        self.close()
+
 app = QApplication(sys.argv)
 window = login()
 window.show()

@@ -16,15 +16,20 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QIcon, QImage, QKeySequence, QLinearGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
-from PySide6.QtWidgets import (QApplication, QMainWindow, QMenu, QMenuBar,
-    QSizePolicy, QStatusBar, QWidget)
+from PySide6.QtWidgets import (QApplication, QLabel, QMainWindow, QMenu,
+    QMenuBar, QSizePolicy, QStatusBar, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(800, 541)
+        MainWindow.setEnabled(True)
+        MainWindow.resize(800, 545)
+        MainWindow.setMinimumSize(QSize(800, 545))
+        MainWindow.setMaximumSize(QSize(800, 545))
         MainWindow.setStyleSheet(u"")
+        MainWindow.setAnimated(True)
+        MainWindow.setDockNestingEnabled(False)
         self.actionUsuarios_cadastrados = QAction(MainWindow)
         self.actionUsuarios_cadastrados.setObjectName(u"actionUsuarios_cadastrados")
         self.actionEditar_usuario = QAction(MainWindow)
@@ -69,6 +74,12 @@ class Ui_MainWindow(object):
         self.actionSaida_avulsa.setObjectName(u"actionSaida_avulsa")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
+        self.label = QLabel(self.centralwidget)
+        self.label.setObjectName(u"label")
+        self.label.setGeometry(QRect(0, 0, 801, 521))
+        self.label.setMaximumSize(QSize(16777215, 16777215))
+        self.label.setPixmap(QPixmap(u"assets/Inserir um t\u00edtulo.png"))
+        self.label.setScaledContents(True)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
@@ -133,7 +144,7 @@ class Ui_MainWindow(object):
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Sistema de gerenciamento de vendas", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Sistema de Gerenciamento de Vendas", None))
         self.actionUsuarios_cadastrados.setText(QCoreApplication.translate("MainWindow", u"Usuarios cadastrados", None))
         self.actionEditar_usuario.setText(QCoreApplication.translate("MainWindow", u"Editar usuario", None))
         self.actionSair.setText(QCoreApplication.translate("MainWindow", u"Sair", None))
@@ -155,6 +166,7 @@ class Ui_MainWindow(object):
         self.actionEditar_Cliente.setText(QCoreApplication.translate("MainWindow", u"Editar Cliente", None))
         self.actionGerar_Qtd_Ticket.setText(QCoreApplication.translate("MainWindow", u"Gerar Qtd. Ticket", None))
         self.actionSaida_avulsa.setText(QCoreApplication.translate("MainWindow", u"Saida avulsa", None))
+        self.label.setText("")
         self.menuCadastro.setTitle(QCoreApplication.translate("MainWindow", u"Cadastro", None))
         self.menuUsuario.setTitle(QCoreApplication.translate("MainWindow", u"Usuario", None))
         self.menuProdutos.setTitle(QCoreApplication.translate("MainWindow", u"Produtos", None))

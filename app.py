@@ -13,13 +13,13 @@ from cad_produtos_ui import Ui_cad_produtos
 from about_ui import Ui_about
 from cad_ticket_ui import Ui_cad_ticket
 from about_ui import Ui_about
-from venda_desktop_ui import Ui_venda_desktop
 from cad_cliente_ui import Ui_cad_cliente
 from usuarios_cadastrados_ui import Ui_usuarios_cadastrados
 from produtos_cadastrados_ui import Ui_produtos_cadastrados
 from clientes_cadastrados_ui import Ui_clientes_cadastrados
 from gerar_ticket_ui import Ui_gerar_ticket
 from editar_ticket import Ui_editar_ticket
+from tela_venda import Ui_tela_venda
 
 #tela de login
 class login(QMainWindow):
@@ -72,17 +72,20 @@ class MainWindow(QMainWindow):
         self.ui.actionSair.triggered.connect(self.fechar)
         self.ui.actionNovo_Ticket.triggered.connect(self.abrir_cad_ticket)
         self.ui.actionAbout.triggered.connect(self.abrir_about)
-        self.ui.actionVenda_no_terminal.triggered.connect(self.nova_venda)
         self.ui.actionNovo_Cliente.triggered.connect(self.cad_cliente)
         self.ui.actionUsuarios_cadastrados.triggered.connect(self.usuarios_cadastrados)
         self.ui.actionEditar_produtos.triggered.connect(self.produtos_cadastrados)
         self.ui.actionEditar_Cliente.triggered.connect(self.cliente_cadastrados)
         self.ui.actionGerar_Qtd_Ticket.triggered.connect(self.gerar_ticket)
         self.ui.actionGerenciar_Ticket.triggered.connect(self.editar_ticket)
+        self.ui.actionVenda_no_terminal.triggered.connect(self.venda_terminal)
     
 
     #definindo funções para chamadas de tela a partir do Mainwindow
+    def venda_terminal(self):
+        self.window = venda_terminal()
 
+        self.window.show()
     def editar_ticket(self):
         self.window = editar_ticket()
         self.window.show()
@@ -105,10 +108,6 @@ class MainWindow(QMainWindow):
 
     def cad_cliente(self):
         self.window = cad_cliente()
-        self.window.show()
-
-    def nova_venda(self):
-        self.window = venda_desktop()
         self.window.show()
 
     def abrir_about(self):
@@ -186,7 +185,6 @@ class cad_usuario(QMainWindow):
     def fechar(self):
         self.close()
     
-
 class cad_produtos(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -300,24 +298,6 @@ class cad_ticket(QDialog):
         self.close()
         print("tela de cadastro de ticket fechada")
 
-class venda_desktop(QDialog):
-    def __init__(self):
-        super().__init__()
-        self.ui = Ui_venda_desktop()
-        self.ui.setupUi(self)
-        self.ui.pushButton.clicked.connect(self.salvar)
-        self.ui.pushButton_2.clicked.connect(self.fechar)
-        self.ui.pushButton_3.clicked.connect(self.buscar_produtos)
-    
-    def buscar_produtos(self):
-        print("Buscando produtos")
-
-    def salvar(self):
-        print("salvar")
-
-    def fechar(self):
-        print("tela de vendas fechada")
-        self.close()
 
 class cad_cliente(QDialog):
     def __init__(self):
@@ -497,6 +477,12 @@ class editar_ticket(QDialog):
     def fechar(self):
         print("tela de produtos cadastrados fechada")
         self.close()
+
+class venda_terminal(QDialog):
+    def __init__(self):
+        super().__init__()
+        self.ui = Ui_tela_venda()
+        self.ui.setupUi(self)
 
 app = QApplication(sys.argv)
 window = login()

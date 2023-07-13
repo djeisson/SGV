@@ -15,7 +15,7 @@ pip install Pyside6
 pip install PyQt5 PyQt5 --tools
 
 *traduzir o .ui
-Pyside6-uic editar_ticket.ui -o editar_ticket.py
+Pyside6-uic tela_venda.ui -o tela_venda.py
 
 
 import sys //Importar sistema
